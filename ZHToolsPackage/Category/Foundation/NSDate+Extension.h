@@ -35,4 +35,12 @@
  */
 - (NSString *)returnString;
 
+
+/**
+ 星期几
+
+ @return 星期几
+ */
+- (NSString*)weekdayString;
+
 @end

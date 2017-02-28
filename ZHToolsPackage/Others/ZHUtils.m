@@ -1,138 +1,57 @@
 //
-//  NSDate+Extension.m
-//  不忘初心，方得始终。
+//  ZHUtils.m
+//  不忘初心
 //
-//  Created by HenryVarro on 15/4/26.
-//  Copyright © 2015年 丁子恒. All rights reserved.
+//  Created by HenryVarro on 17/2/28.
+//  Copyright © 2017年 丁子恒. All rights reserved.
 //
 
-#import "NSDate+Extension.h"
+#import "ZHUtils.h"
+#import <UIKit/UIApplication.h>
 
-@implementation NSDate (Extension)
+@implementation ZHUtils
++ (void)callWithPhoneNumber:(NSString *)phone completion:(void(^)(BOOL success))completion
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", phone]];
+    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:completion];
+}
 
-/**
- *  判断某个时间是否为今年
- */
-- (BOOL)isThisYear
++ (BOOL)isValidateEmail:(NSString *)email
 {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    // 获得某个时间的年月日时分秒
-    NSDateComponents *dateCmps = [calendar components:NSCalendarUnitYear fromDate:self];
-    NSDateComponents *nowCmps = [calendar components:NSCalendarUnitYear fromDate:[NSDate date]];
-    return dateCmps.year == nowCmps.year;
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:email];
 }
-/**
- *  判断某个时间是否为同年同月
- */
-- (BOOL)isThisMonth
+
++ (BOOL)isValidateMobile:(NSString *)mobile
 {
-    NSDate *now = [NSDate date];
-    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-    fmt.dateFormat = @"yyyy-MM";
-    
-    NSString *dateStr = [fmt stringFromDate:self];
-    NSString *nowStr = [fmt stringFromDate:now];
-    
-    return [dateStr isEqualToString:nowStr];
+    //手机号以13， 15，18开头，八个 \d 数字字符
+    NSString *phoneRegex = @"^((13[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex];
+    return [phoneTest evaluateWithObject:mobile];
 }
-/**
- *  判断某个时间是否为今天
- */
-- (BOOL)isToday
+
++ (BOOL)isValidateIDCard:(NSString *)identityCard
 {
-    NSDate *now = [NSDate date];
-    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-    fmt.dateFormat = @"yyyy-MM-dd";
-    
-    NSString *dateStr = [fmt stringFromDate:self];
-    NSString *nowStr = [fmt stringFromDate:now];
-    
-    return [dateStr isEqualToString:nowStr];
-}
-/**
- *  判断某个时间是否为未来的时间，只精确到天
- */
-- (BOOL)isFutureTime
-{
-    NSDate *now = [NSDate date];
-    
-    // date ==  2014-04-30 10:05:28 --> 2014-04-30 00:00:00
-    // now == 2014-05-01 09:22:10 --> 2014-05-01 00:00:00
-    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-    fmt.dateFormat = @"yyyy-MM-dd";
-    
-    // 2014-04-30
-    NSString *dateStr = [fmt stringFromDate:self];
-    // 2014-10-18
-    NSString *nowStr = [fmt stringFromDate:now];
-    
-    // 2014-10-30 00:00:00
-    NSDate *date = [fmt dateFromString:dateStr];
-    // 2014-10-18 00:00:00
-    now = [fmt dateFromString:nowStr];
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
-    NSDateComponents *cmps = [calendar components:unit fromDate:date toDate:now options:0];
-    
-    if (cmps.year < 0) {
-        return YES;
-    } else if (cmps.year == 0 && cmps.month < 0) {
-        return YES;
-    } else if (cmps.month == 0 && cmps.day < 0) {
-        return YES;
-    } else {
-        return NO;
+    BOOL flag;
+    if (identityCard.length <= 0) {
+        flag = NO;
+        return flag;
     }
+    NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
+    NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
+    return [identityCardPredicate evaluateWithObject:identityCard];
 }
 
-/**
- *  判断某个时间是否为昨天
- */
-- (BOOL)isYesterday
++ (BOOL)isValidateCarNo:(NSString *)carNo
 {
-    NSDate *now = [NSDate date];
-    
-    // date ==  2014-04-30 10:05:28 --> 2014-04-30 00:00:00
-    // now == 2014-05-01 09:22:10 --> 2014-05-01 00:00:00
-    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-    fmt.dateFormat = @"yyyy-MM-dd";
-    
-    // 2014-04-30
-    NSString *dateStr = [fmt stringFromDate:self];
-    // 2014-10-18
-    NSString *nowStr = [fmt stringFromDate:now];
-    
-    // 2014-10-30 00:00:00
-    NSDate *date = [fmt dateFromString:dateStr];
-    // 2014-10-18 00:00:00
-    now = [fmt dateFromString:nowStr];
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
-    NSDateComponents *cmps = [calendar components:unit fromDate:date toDate:now options:0];
-    
-    return cmps.year == 0 && cmps.month == 0 && cmps.day == 1;
+    NSString *carRegex = @"^[A-Za-z]{1}[A-Za-z_0-9]{5}$";
+    NSPredicate *carTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",carRegex];
+    return [carTest evaluateWithObject:carNo];
 }
 
-/**
- *  将NSDate转成字符串
- */
-- (NSString *)returnString
-{
-    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-    
-    if ([self isThisYear]) { // 是今年
-        fmt.dateFormat = @"MM月dd日";
-    } else { // 不是今年
-        fmt.dateFormat = @"yyyy年MM月dd日";
-    }
-    return [fmt stringFromDate:self];
-}
 
-- (NSString*)weekdayString {
++ (NSString*)weekdayStringFromDate:(NSDate*)inputDate {
     
     NSArray *weekdays = [NSArray arrayWithObjects: [NSNull null], @"星期日", @"星期一", @"星期二", @"星期三", @"星期四", @"星期五", @"星期六", nil];
     
@@ -144,7 +63,7 @@
     
     NSCalendarUnit calendarUnit = NSCalendarUnitWeekday;
     
-    NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:self];
+    NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:inputDate];
     
     return [weekdays objectAtIndex:theComponents.weekday];
     
@@ -226,13 +145,13 @@
     
     //取当前公历年、月、日
     
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:solarDate];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:solarDate];
     
-    wCurYear = (int)[components year];
+    wCurYear = [components year];
     
-    wCurMonth = (int)[components month];
+    wCurMonth = [components month];
     
-    wCurDay = (int)[components day];
+    wCurDay = [components day];
     
     
     
@@ -364,5 +283,4 @@
     
     return lunarDate;
     
-}
-@end
+}@end
