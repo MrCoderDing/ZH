@@ -124,4 +124,22 @@
 - (CGFloat)maxY{
     return CGRectGetMaxY(self.frame);
 }
+
+- (void)cornerRectWith:(UIRectCorner)rectCorner
+{
+    UIBezierPath *maskPath  = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:rectCorner cornerRadii:CGSizeMake(5.f, 5.f)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame         = self.bounds;
+    maskLayer.path          = maskPath.CGPath;
+    self.layer.mask         = maskLayer;
+}
+
+- (UIImage *)snapshoot
+{
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, self.layer.contentsScale);//[UIScreen mainScreen].scale
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *snapshootImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return snapshootImage;
+}
 @end

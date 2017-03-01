@@ -1,6 +1,6 @@
 # ZH
 不忘初心
-/**
+
 　　　　　　　　　　　 ::
 　　　　　　　　　　　:;J7, :,                        ::;7:
 　　　　　　　　　　　,ivYi, ,                       ;LLLFS:
@@ -38,4 +38,3 @@
 
     Code is far away from bug with the Doge protecting
     Doge保佑，永无BUG
-*/
