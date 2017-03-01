@@ -66,7 +66,4 @@
 + (BOOL)isValidateCarNo:(NSString *)carNo;
 
 
-
-///获得某个NSDate的农历表示法
-+ (NSString*)getChineseCalendarWithDate:(NSDate *)date;
 @end
