@@ -11,6 +11,7 @@
 		3328B8B31E4AE32E00FEFA40 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328B8B11E4AE32E00FEFA40 /* MBProgressHUD.m */; };
 		3328B8BA1E4AE60700FEFA40 /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328B8B61E4AE60700FEFA40 /* NSObject+YYModel.m */; };
 		3328B8BB1E4AE60700FEFA40 /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3328B8B81E4AE60700FEFA40 /* YYClassInfo.m */; };
+		3379AA1C1E66A2C800DC42CD /* ZHFileCleanTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379AA1B1E66A2C800DC42CD /* ZHFileCleanTool.m */; };
 		339D86E01E496C60002A57F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 339D86DF1E496C60002A57F3 /* main.m */; };
 		339D86E31E496C60002A57F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 339D86E21E496C60002A57F3 /* AppDelegate.m */; };
 		339D86E61E496C60002A57F3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339D86E51E496C60002A57F3 /* ViewController.m */; };
@@ -66,6 +67,8 @@
 		3328B8B71E4AE60700FEFA40 /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
 		3328B8B81E4AE60700FEFA40 /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
 		3328B8B91E4AE60700FEFA40 /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
+		3379AA1A1E66A2C800DC42CD /* ZHFileCleanTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHFileCleanTool.h; sourceTree = "<group>"; };
+		3379AA1B1E66A2C800DC42CD /* ZHFileCleanTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHFileCleanTool.m; sourceTree = "<group>"; };
 		339D86DB1E496C60002A57F3 /* 不忘初心.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "不忘初心.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		339D86DF1E496C60002A57F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		339D86E11E496C60002A57F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -326,6 +329,8 @@
 				33DB0D6D1E65876100F4E123 /* ZHSingleton.h */,
 				33DB0D801E6587EE00F4E123 /* ZHUtils.h */,
 				33DB0D811E6587EE00F4E123 /* ZHUtils.m */,
+				3379AA1A1E66A2C800DC42CD /* ZHFileCleanTool.h */,
+				3379AA1B1E66A2C800DC42CD /* ZHFileCleanTool.m */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -491,6 +496,7 @@
 				33DB0D701E65876100F4E123 /* NSDictionary+Additions.m in Sources */,
 				3328B8BA1E4AE60700FEFA40 /* NSObject+YYModel.m in Sources */,
 				3328B8B21E4AE32E00FEFA40 /* MBProgressHUD+HV.m in Sources */,
+				3379AA1C1E66A2C800DC42CD /* ZHFileCleanTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
